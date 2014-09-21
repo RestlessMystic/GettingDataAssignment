@@ -3,11 +3,12 @@ GettingDataAssignment
 
 This Repo has been created for the Course Project of Getting and Cleaning Data Course by Coursera. 
 
-This Repo has three files.
+This Repo has four files.
 
 1. Readme.md : This file explains the contents of the Repo
 2. run_analysis.R : R code that process the data set to obtain the required output.
 3. Codebook : R Markup file which explains the variables used in the data
+4. output.txt : Output file
 
 ### Running
 
