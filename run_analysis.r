@@ -45,12 +45,13 @@ colnames(data) <- col.n
 ###################          PART 3        ####################
 ############# Attaching Descriptive Activity Names ############ 
 
-data$Activity <- as.factor(data$Activity)
+data$Activity <- as.factor(data$Activity)     # Converting to Factors
 levels(data$Activity) <- c("WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS" , "SITTING", "STANDING", "LAYING")
 
 ###################          PART 4        ####################
 ############# Attaching Descriptive Activity Names ############ 
 
+# Using Regext to Substitute Patterns in Column Names
 proc <- colnames(data)
 proc <- gsub("BodyBody", "Body", proc)
 proc <- gsub("-mean\\(\\)", " Mean ", proc)
@@ -66,3 +67,26 @@ proc <- gsub("^t", "Time Domain ", proc)
 proc <- gsub("^f", "Frequency Domain ", proc)
 proc <- gsub("[ ]+", " ", proc)
 colnames(data) <- proc
+
+
+########################   PART 5    ###########################
+####################### Aggregating ########################### 
+
+
+aggdata <-aggregate(data, by=list(data$SubjectList, data$Activity),
+                    FUN=mean, na.rm=TRUE) # Aggregating data to find Mean
+rm(data)
+
+# Making the data Tidy
+data <- aggdata[,c(1:81)]     
+cna <- colnames(data)
+cna[1] <- "Subject"
+cna[2] <- "Activity"
+for(i in 3:81)
+{
+    cna[i] <- paste("avg of ", cna[i])
+}
+colnames(data) <- cna
+
+# Writing the data to file
+write.table(data, "output.txt", row.names = FALSE)
