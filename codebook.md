@@ -16,23 +16,23 @@ The dataset may be downloaded from [here] (http://archive.ics.uci.edu/ml/machine
 
 The whole process may be divided into 5 steps.
 
-1. Merging Testing and Training Data Sets
+* Merging Testing and Training Data Sets
 
 The components of training and testing data sets were individually read into corresponding data frames, which were integrated using cbind.data.frame() function to provide two data sets. These were then integrated using rbind.data.frame() to produce one data set. This resulted in a data set with 10299 rows and 563 columns.
 
-2. Choosing columns about Mean or Standard Deviation
+* Choosing columns about Mean or Standard Deviation
 
 "features.txt" file contains information regarding the columns of the dataset. Using this information, all columns containing mean() or std() in the name were retained. This resulted in a data set with 81 columns. The names from features.txt were attributed to the data frame columns.
 
-3. Giving Proper activity names
+* Giving Proper activity names
 
 The files Y_Train.txt and Y_Test.txt contained information regarding the state of the user in a numeric form. The explanation is given in file Activity Labels.txt which explains the state corresponding to each numbers in this column as 1 : WALKING, 2 : WALKING_UPSTAIRS, 3 : WALKING_DOWNSTAIRS, 4 : SITTING, 5 : STANDING and 6 : LAYING. These character values were attributed to the data frame after converting the activity field into a factor.
 
-4. Giving Descriptive Variable Names
+* Giving Descriptive Variable Names
 
 Proper Variable Names were given by using Regular expressions to expand the existing variable names. The codebook that came with the data set was used to identify how to properly expand the column names. 
 
-5. Aggregate data with means
+* Aggregate data with means
 
 The aggregate function of R was used to aggregate the data grouped by activity per subject. This was then written to a file using the write.table function.
 
